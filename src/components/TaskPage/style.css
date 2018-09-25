@@ -1,0 +1,13 @@
+.task-page {
+  box-sizing: border-box;
+
+  width: 30%;
+  padding: 20px;
+  margin: 0 auto;
+
+  background-color: #f2f2f2;
+}
+.task-page__state,
+.task-page__time {
+  display: block;
+}

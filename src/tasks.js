@@ -55,7 +55,7 @@ export default [
   },
   {
     name: "Задача7",
-    description: "Описание задачи6",
+    description: "Описание задачи7",
     status: "План",
     priority: "Низкий",
     date: "Дата появления задачи",
@@ -64,7 +64,7 @@ export default [
   },
   {
     name: "Задача8",
-    description: "Описание задачи6",
+    description: "Описание задачи8",
     status: "В процессе",
     priority: "Высокий",
     date: "Дата появления задачи",
@@ -73,7 +73,7 @@ export default [
   },
   {
     name: "Задача9",
-    description: "Описание задачи6",
+    description: "Описание задачи9",
     status: "Готово",
     priority: "Низкий",
     date: "Дата появления задачи",

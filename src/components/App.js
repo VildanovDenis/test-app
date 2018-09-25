@@ -1,7 +1,7 @@
 import React from "react";
-import LoginForm from "./Login";
-import TaskPage from "./TaskPage";
-import TaskList from "./TaskList";
+import LoginForm from "./Login/Login";
+import TaskPage from "./TaskPage/TaskPage";
+import TaskList from "./TaskList/TaskList";
 
 function App() {
   return (

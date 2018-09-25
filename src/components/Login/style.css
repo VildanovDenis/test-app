@@ -1,0 +1,40 @@
+.Login-form {
+  box-sizing: border-box;
+
+  width: 46%;
+  padding: 25px;
+  border: 2px solid #c9c9c9;
+  margin: 0 auto;
+
+  background-color: white;
+  border-radius: 5px;
+}
+.Login-form h1 {
+  text-align: center;
+}
+.login-form__area {
+  display: block;
+
+  width: 70%;
+  margin: 0 auto;
+  margin-bottom: 5px;
+}
+.login-form__input-title {
+  display: block;
+}
+.login-form__input {
+  box-sizing: border-box;
+
+  width: 100%;
+  height: 20px;
+  border: 1px solid #c9c9c9;
+
+  background-color: transparent;
+}
+.login-form__login {
+  display: flex;
+  justify-content: space-between;
+
+  width: 70%;
+  margin: 0 auto;
+}

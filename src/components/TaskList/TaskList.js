@@ -1,5 +1,6 @@
 import React from "react";
-import tasks from "../tasks";
+import tasks from "../../tasks";
+import "../TaskList/style.css";
 
 // Таблица задач
 
@@ -20,8 +21,8 @@ const Task = props => {
 export default function TaskList({ task }) {
   const TaskElement = tasks.map(task => <Task key={task.name} task={task} />);
   return (
-    <div>
-      <table>
+    <section>
+      <table className="task-table">
         <tbody key="body">
           <tr>
             <th>Задача</th>
@@ -32,6 +33,6 @@ export default function TaskList({ task }) {
           {TaskElement}
         </tbody>
       </table>
-    </div>
+    </section>
   );
 }
