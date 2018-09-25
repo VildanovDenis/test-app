@@ -1,6 +1,9 @@
 import React from "react";
+import tasks from "../tasks";
 
-function TaskPage(props) {
+// Подробная страница с задачей
+
+const Task = props => {
   const { task } = props;
   return (
     <div>
@@ -17,6 +20,11 @@ function TaskPage(props) {
       </p>
     </div>
   );
-}
+};
 
-export default TaskPage;
+export default function TaskPage({ task }) {
+  const TaskPageElement = tasks.map(task => (
+    <Task key={task.name} task={task} />
+  ));
+  return <section>{TaskPageElement}</section>;
+}

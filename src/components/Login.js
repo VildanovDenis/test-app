@@ -3,7 +3,7 @@ import React from "react";
 function LoginForm() {
   return (
     <div className="Login-form">
-      <h1>Чтобы продолжить войдите в систему</h1>
+      <h1>Войдите в систему, чтобы продолжить.</h1>
       <form action="#">
         <label>
           Логин: <input type="text" />
