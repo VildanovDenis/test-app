@@ -6,7 +6,7 @@ import TaskList from "./TaskList/TaskList";
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { isLogin: false };
+    this.state = { isLogin: true };
   }
 
   render() {

@@ -22,22 +22,24 @@ import "../TaskList/style.css";
 
 // Таблица задач
 
-const Task = props => {
-  const { task } = props;
-  return (
-    <tr>
-      <td>
-        <a href="">{task.name}</a>
-      </td>
-      <td>{task.description}</td>
-      <td>{task.status}</td>
-      <td>{task.priority}</td>
-    </tr>
-  );
-};
-
 export default function TaskList({ task }) {
+  const Task = props => {
+    const { task } = props;
+
+    return (
+      <tr>
+        <td>
+          <a href="">{task.name}</a>
+        </td>
+        <td>{task.description}</td>
+        <td>{task.status}</td>
+        <td>{task.priority}</td>
+      </tr>
+    );
+  };
+
   const TaskElement = tasks.map(task => <Task key={task.name} task={task} />);
+
   return (
     <section>
       <table className="task-table">
