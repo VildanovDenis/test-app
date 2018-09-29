@@ -2,6 +2,24 @@ import React from "react";
 import tasks from "../../tasks";
 import "../TaskList/style.css";
 
+// class TaskLink extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = { isOpen: false };
+//     this.handleClick = this.handleClick.bind(this);
+//   }
+
+//   handleClick() {
+//     this.setState(prevState => ({
+//       isOpen: !prevState.isOpen
+//     }));
+//   }
+
+//   render({ task }) {
+//     return <a href="">{task.name}</a>;
+//   }
+// }
+
 // Таблица задач
 
 const Task = props => {

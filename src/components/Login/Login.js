@@ -1,27 +1,57 @@
 import React from "react";
 import "../Login/style.css";
 
+class Button extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { isLogin: false };
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.setState(prevState => ({
+      isLogin: !prevState.isLogin
+    }));
+  }
+
+  render() {
+    return (
+      <button type="Submit" className="" onClick={this.handleClick}>
+        Войти
+      </button>
+    );
+  }
+}
+
 function LoginForm() {
   return (
-    <div className="Login-form">
+    <div className="login-form">
       <h1>Войдите в систему, чтобы продолжить.</h1>
       <form action="#">
         <div>
           <label className="login-form__area">
             <span className="login-form__input-title">Логин:</span>
-            <input className="login-form__input" type="text" />
+            <input
+              className="login-form__input"
+              type="text"
+              placeholder="Логин"
+              autoComplete="on"
+            />
           </label>
         </div>
         <div>
           <label className="login-form__area">
             <span className="login-form__input-title">Пароль:</span>
-            <input className="login-form__input" type="password" />
+            <input
+              className="login-form__input"
+              type="password"
+              placeholder="Пароль"
+              autoComplete="on"
+            />
           </label>
         </div>
         <div className="login-form__login">
-          <button onClick={handleClick} className="login-form__button">
-            Войти
-          </button>
+          <Button className="login-form__button" />
           <label>
             <input type="checkbox" />
             Запомнить меня
@@ -30,10 +60,6 @@ function LoginForm() {
       </form>
     </div>
   );
-}
-
-function handleClick() {
-  console.log(">>>", "clicked");
 }
 
 export default LoginForm;
