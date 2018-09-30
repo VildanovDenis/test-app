@@ -5,7 +5,7 @@ const initialState = {
 export const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case "AUTH": {
-      debugger;
+      // debugger;
       return { isAuth: action.payload };
     }
     default: {
