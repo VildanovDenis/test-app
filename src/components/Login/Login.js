@@ -1,65 +1,80 @@
 import React from "react";
-import "../Login/style.css";
+import "./style.css";
+import { auth } from "../../API/auth";
 
-class Button extends React.Component {
+class LoginForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { isLogin: false };
-    this.handleClick = this.handleClick.bind(this);
+    this.state = { loginInput: "", passwordInput: "" };
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.onLoginInputChange = this.onLoginInputChange.bind(this);
+    this.onPasswordInputChange = this.onPasswordInputChange.bind(this);
   }
 
-  handleClick() {
-    this.setState(prevState => ({
-      isLogin: !prevState.isLogin
-    }));
+  handleSubmit() {
+    auth({
+      login: this.state.loginInput,
+      password: this.state.passwordInput
+    }).then(({ ok }) => {
+      this.props.onLogin(ok);
+    });
+  }
+
+  onLoginInputChange(event) {
+    this.setState({
+      loginInput: event.target.value
+    });
+  }
+
+  onPasswordInputChange(event) {
+    this.setState({
+      passwordInput: event.target.value
+    });
   }
 
   render() {
     return (
-      <button type="Submit" className="" onClick={this.handleClick}>
-        Войти
-      </button>
+      <div className="login-form">
+        <h1>Войдите в систему, чтобы продолжить.</h1>
+        <form action="#">
+          <div>
+            <label className="login-form__area">
+              <span className="login-form__input-title">Логин:</span>
+              <input
+                className="login-form__input"
+                type="text"
+                placeholder="Логин"
+                autoComplete="on"
+                onChange={this.onLoginInputChange}
+              />
+            </label>
+          </div>
+          <div>
+            <label className="login-form__area">
+              <span className="login-form__input-title">Пароль:</span>
+              <input
+                className="login-form__input"
+                type="password"
+                placeholder="Пароль"
+                autoComplete="on"
+                onChange={this.onPasswordInputChange}
+              />
+            </label>
+          </div>
+          <div className="login-form__login">
+            <button type="Submit" className="" onClick={this.handleSubmit}>
+              Войти
+            </button>
+            <label>
+              <input type="checkbox" />
+              Запомнить меня
+            </label>
+          </div>
+        </form>
+      </div>
     );
   }
-}
-
-function LoginForm() {
-  return (
-    <div className="login-form">
-      <h1>Войдите в систему, чтобы продолжить.</h1>
-      <form action="#">
-        <div>
-          <label className="login-form__area">
-            <span className="login-form__input-title">Логин:</span>
-            <input
-              className="login-form__input"
-              type="text"
-              placeholder="Логин"
-              autoComplete="on"
-            />
-          </label>
-        </div>
-        <div>
-          <label className="login-form__area">
-            <span className="login-form__input-title">Пароль:</span>
-            <input
-              className="login-form__input"
-              type="password"
-              placeholder="Пароль"
-              autoComplete="on"
-            />
-          </label>
-        </div>
-        <div className="login-form__login">
-          <Button className="login-form__button" />
-          <label>
-            <input type="checkbox" />
-            Запомнить меня
-          </label>
-        </div>
-      </form>
-    </div>
-  );
 }
 
 export default LoginForm;

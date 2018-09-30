@@ -1,0 +1,7 @@
+{
+  "users": [
+    { "login": "DenisVildanov", "password": "Qwerty" },
+    { "login": "Login", "password": "Password" },
+    { "login": "Admin", "password": "ImAdmin" }
+  ]
+}
