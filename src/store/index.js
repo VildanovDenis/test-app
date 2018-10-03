@@ -2,13 +2,13 @@ import { combineReducers, createStore } from "redux";
 
 import { authReducer } from "./reducers/auth";
 
-const allReducers = combineReducers({ authReducer });
+import { scrumTableReducer } from "./reducers/table-render";
+
+const allReducers = combineReducers({ authReducer, scrumTableReducer });
 
 export const store = createStore(
   allReducers,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
-// setTimeout(() => {
-//   store.dispatch({ payload: { isAuth: true }, type: "AUTH" });
-// }, 2000);
+// window.store = store;

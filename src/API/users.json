@@ -4,5 +4,6 @@
     { "login": "Login", "password": "Password" },
     { "login": "Admin", "password": "ImAdmin" },
     { "login": "1", "password": "1" }
-  ]
+  ],
+  "TableShow": [{ "isScrumShow": false }]
 }

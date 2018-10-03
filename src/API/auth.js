@@ -14,9 +14,3 @@ export const auth = ({ login, password }) =>
       resolve({ ok: isUserExist });
     }, 500);
   });
-
-// const auth = ({ login, password }) =>
-//   fetch("./auth/login", {
-//     method: "POST",
-//     body: JSON.stringify({ login, password })
-//   });

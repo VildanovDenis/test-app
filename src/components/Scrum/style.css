@@ -1,0 +1,63 @@
+.scrum-table__wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+.button-wrapper {
+  position: relative;
+  width: 100%;
+  margin-bottom: 10px;
+}
+.scrum-table__button {
+  position: relative;
+
+  width: auto;
+  height: auto;
+  border: none;
+  padding: 0;
+  margin: 15px;
+
+  background-color: transparent;
+  outline: none;
+}
+/* .scrum-table__button::before {
+  content: "";
+  box-sizing: border-box;
+
+  position: absolute;
+  top: 0;
+  left: 15px;
+
+  width: 0;
+  height: 0;
+
+  border: 25px solid rgba(185, 185, 185, 0.1);
+  border-top: 10px solid transparent;
+  border-left: 0 solid transparent;
+  border-bottom: 10px solid transparent;
+}
+.scrum-table__button:hover::before {
+  border-right: 25px solid rgba(185, 185, 185, 0.5);
+} */
+.done,
+.in-progress,
+.planned {
+  width: 33%;
+}
+.done h2,
+.in-progress h2,
+.planned h2 {
+  text-align: center;
+}
+.scrum-task-page {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+
+  width: 60%;
+  padding: 10px;
+  margin: 0 auto 10px;
+  border: 2px solid rgb(197, 196, 196);
+  border-radius: 5px;
+
+  background-color: rgb(233, 233, 233);
+}

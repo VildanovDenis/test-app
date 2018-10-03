@@ -2,44 +2,57 @@ import React from "react";
 import LoginForm from "./Login/Login";
 import TaskPage from "./TaskPage/TaskPage";
 import TaskList from "./TaskList/TaskList";
+import ScrumTable from "./Scrum/ScrumTable";
 import { authAction } from "../store/actions/auth-action";
 
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { tableRenderScrum } from "../store/actions/table-render-action";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      isScrumTableShow: false
+    };
   }
 
   render() {
     const { isLogin } = this.props;
+    const { isScrumShow } = this.props;
 
     return (
-      <div>
+      <React.Fragment>
         {isLogin ? (
-          <React.Fragment>
+          isScrumShow ? (
+            <ScrumTable toggleTable={this.props.toggleTable} />
+          ) : (
             <TaskList />
-            <TaskPage />
-          </React.Fragment>
+          )
         ) : (
-          <LoginForm onLogin={this.props.auth} onClick={this.props.auth} />
+          <LoginForm onLogin={this.props.auth} />
         )}
-      </div>
+      </React.Fragment>
     );
   }
 }
 
 const mapStateToProps = state => {
   return {
-    isLogin: state.authReducer.isAuth
+    isLogin: state.authReducer.isAuth,
+    isScrumShow: state.scrumTableReducer.isScrumShow
   };
 };
 
-const mapDispatchToProps = dispatch => ({
-  auth: isAuth => {
-    dispatch(authAction(isAuth));
-  }
-});
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      auth: authAction,
+      toggleTable: tableRenderScrum
+    },
+    dispatch
+  );
 
 export default connect(
   mapStateToProps,

@@ -29,7 +29,7 @@ export default [
   {
     name: "Задача4",
     description: "Описание задачи4",
-    status: "План",
+    status: "Готово",
     priority: "Высокий",
     date: "Дата появления задачи",
     timetodo: "Время на выполнение",
@@ -47,7 +47,7 @@ export default [
   {
     name: "Задача6",
     description: "Описание задачи6",
-    status: "План",
+    status: "В процессе",
     priority: "Высокий",
     date: "Дата появления задачи",
     timetodo: "Время на выполнение",
@@ -67,15 +67,6 @@ export default [
     description: "Описание задачи8",
     status: "В процессе",
     priority: "Высокий",
-    date: "Дата появления задачи",
-    timetodo: "Время на выполнение",
-    wastedtime: "Потраченное время"
-  },
-  {
-    name: "Задача9",
-    description: "Описание задачи9",
-    status: "Готово",
-    priority: "Низкий",
     date: "Дата появления задачи",
     timetodo: "Время на выполнение",
     wastedtime: "Потраченное время"

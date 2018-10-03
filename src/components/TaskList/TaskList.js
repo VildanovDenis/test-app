@@ -1,26 +1,9 @@
 import React from "react";
 import tasks from "../../tasks";
 import "../TaskList/style.css";
-
-// class TaskLink extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = { isOpen: false };
-//     this.handleClick = this.handleClick.bind(this);
-//   }
-
-//   handleClick() {
-//     this.setState(prevState => ({
-//       isOpen: !prevState.isOpen
-//     }));
-//   }
-
-//   render({ task }) {
-//     return <a href="">{task.name}</a>;
-//   }
-// }
-
-// Таблица задач
+import { tableRenderScrum } from "../../store/actions/table-render-action";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 const Task = props => {
   const { task } = props;
@@ -112,6 +95,18 @@ class TaskList extends React.Component {
     ));
     return (
       <section>
+        <div className="button-wrapper">
+          <a
+            className="table__button-to-scrum"
+            href="#"
+            onClick={event => {
+              event.preventDefault();
+              this.props.tableRenderScrum(true);
+            }}
+          >
+            Scrum-доска
+          </a>
+        </div>
         <table className="task-table">
           <tbody key="body">
             <tr>
@@ -162,4 +157,21 @@ class TaskList extends React.Component {
   }
 }
 
-export default TaskList;
+const mapStateToProps = state => {
+  return {
+    isScrumShow: state.scrumTableReducer.isScrumShow
+  };
+};
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      tableRenderScrum
+    },
+    dispatch
+  );
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TaskList);
