@@ -1,11 +1,47 @@
 .task-page {
+  position: absolute;
+  top: 50%;
+  left: 50%;
   box-sizing: border-box;
 
   width: 30%;
   padding: 20px;
   margin: 10px auto 0;
 
-  background-color: #f2f2f2;
+  transform: translateX(-50%) translateY(-50%);
+
+  background-color: #ffffff;
+}
+.task-page__button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: block;
+
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: none;
+
+  background-color: transparent;
+}
+.task-page__button::after,
+.task-page__button::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 9px;
+
+  width: 20px;
+  height: 2px;
+
+  background-color: black;
+}
+.task-page__button::after {
+  transform: rotate(45deg);
+}
+.task-page__button::before {
+  transform: rotate(-45deg);
 }
 .task-page__state,
 .task-page__time {

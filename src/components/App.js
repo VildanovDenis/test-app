@@ -1,6 +1,5 @@
 import React from "react";
 import LoginForm from "./Login/Login";
-import TaskPage from "./TaskPage/TaskPage";
 import TaskList from "./TaskList/TaskList";
 import ScrumTable from "./Scrum/ScrumTable";
 import { authAction } from "../store/actions/auth-action";

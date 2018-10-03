@@ -1,16 +1,25 @@
 import React from "react";
-import tasks from "../../tasks";
+import TaskPage from "../TaskPage/TaskPage";
 import "../TaskList/style.css";
 import { tableRenderScrum } from "../../store/actions/table-render-action";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 const Task = props => {
-  const { task } = props;
+  const { task, onLinkClick } = props;
+
   return (
     <tr>
       <td>
-        <a href="">{task.name}</a>
+        <a
+          href=""
+          onClick={event => {
+            event.preventDefault();
+            onLinkClick(task);
+          }}
+        >
+          {task.name}
+        </a>
       </td>
       <td>{task.description}</td>
       <td>{task.status}</td>
@@ -27,11 +36,31 @@ class TaskList extends React.Component {
     priority: "priority"
   };
 
+  componentDidMount() {
+    import("../../tasks").then(result => {
+      this.setState({
+        tasks: result.default
+      });
+    });
+
+    setInterval(
+      () =>
+        import("../../tasks").then(result => {
+          this.setState({
+            tasks: result.default
+          });
+        }),
+      3000
+    );
+  }
+
   constructor(props) {
     super(props);
     this.state = {
       currentFilter: TaskList.filters.task,
-      isFilterReverse: false
+      isFilterReverse: false,
+      openedTask: null,
+      tasks: []
     };
   }
 
@@ -79,7 +108,6 @@ class TaskList extends React.Component {
   }
 
   onFilterClick(filterName) {
-    // debugger;
     this.setState({
       currentFilter: filterName,
       isFilterReverse:
@@ -89,12 +117,20 @@ class TaskList extends React.Component {
     });
   }
 
+  handleClick = openedTask => this.setState({ openedTask });
+
   render() {
-    const TaskElement = this.filterTasks(tasks).map(task => (
-      <Task key={task.name} task={task} />
+    const TaskElement = this.filterTasks(this.state.tasks).map(task => (
+      <Task
+        key={task.id}
+        task={task}
+        onLinkClick={this.handleClick.bind(this)}
+      />
     ));
+    const { openedTask } = this.state;
+
     return (
-      <section>
+      <section className="table-wrapper">
         <div className="button-wrapper">
           <a
             className="table__button-to-scrum"
@@ -152,6 +188,14 @@ class TaskList extends React.Component {
             {TaskElement}
           </tbody>
         </table>
+        {openedTask && (
+          <div className="modal-layout">
+            <TaskPage
+              onButtonClick={this.handleClick.bind(this)}
+              task={openedTask}
+            />
+          </div>
+        )}
       </section>
     );
   }
