@@ -63,7 +63,7 @@ class LoginForm extends React.Component {
             </label>
           </div>
           <div className="login-form__login">
-            <button type="Submit" className="" onClick={this.handleSubmit}>
+            <button type="button" className="" onClick={this.handleSubmit}>
               Войти
             </button>
             <label>

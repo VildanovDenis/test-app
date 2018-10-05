@@ -1,9 +1,11 @@
 import React from "react";
 import TaskPage from "../TaskPage/TaskPage";
+import TaskAdd from "../TaskAdd/TaskAdd";
 import "../TaskList/style.css";
 import { tableRenderScrum } from "../../store/actions/table-render-action";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { tasksAction } from "../../store/actions/tasks-action";
 
 const Task = props => {
   const { task, onLinkClick } = props;
@@ -36,22 +38,10 @@ class TaskList extends React.Component {
     priority: "priority"
   };
 
-  componentDidMount() {
+  componentWillMount() {
     import("../../tasks").then(result => {
-      this.setState({
-        tasks: result.default
-      });
+      this.props.tasksAction(result.default);
     });
-
-    setInterval(
-      () =>
-        import("../../tasks").then(result => {
-          this.setState({
-            tasks: result.default
-          });
-        }),
-      3000
-    );
   }
 
   constructor(props) {
@@ -60,6 +50,7 @@ class TaskList extends React.Component {
       currentFilter: TaskList.filters.task,
       isFilterReverse: false,
       openedTask: null,
+      addingTask: false,
       tasks: []
     };
   }
@@ -118,16 +109,19 @@ class TaskList extends React.Component {
   }
 
   handleClick = openedTask => this.setState({ openedTask });
+  addTaskClick = addingTask => this.setState({ addingTask });
 
   render() {
-    const TaskElement = this.filterTasks(this.state.tasks).map(task => (
+    const tasks = this.props;
+    const TaskElement = this.filterTasks(this.props.tasks).map(task => (
       <Task
-        key={task.id}
+        key={task.name}
         task={task}
         onLinkClick={this.handleClick.bind(this)}
       />
     ));
     const { openedTask } = this.state;
+    const { addingTask } = this.state;
 
     return (
       <section className="table-wrapper">
@@ -188,8 +182,28 @@ class TaskList extends React.Component {
             {TaskElement}
           </tbody>
         </table>
+        <div className="task-add-wrapper">
+          <button
+            className="task-add__button"
+            type="button"
+            onClick={() => this.addTaskClick(true)}
+          >
+            Добавить задачу
+          </button>
+        </div>
+        {addingTask && (
+          <div
+            className="modal-layout"
+            // onClick={() => this.addTaskClick(false)}
+          >
+            <TaskAdd onButtonClick={this.addTaskClick.bind(this)} />
+          </div>
+        )}
         {openedTask && (
-          <div className="modal-layout">
+          <div
+            className="modal-layout"
+            // onClick={() => this.handleClick(null)}
+          >
             <TaskPage
               onButtonClick={this.handleClick.bind(this)}
               task={openedTask}
@@ -202,15 +216,18 @@ class TaskList extends React.Component {
 }
 
 const mapStateToProps = state => {
+  console.log(state);
   return {
-    isScrumShow: state.scrumTableReducer.isScrumShow
+    isScrumShow: state.scrumTableReducer.isScrumShow,
+    tasks: state.tasksReducer
   };
 };
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      tableRenderScrum
+      tableRenderScrum,
+      tasksAction
     },
     dispatch
   );

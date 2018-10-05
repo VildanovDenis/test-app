@@ -10,7 +10,7 @@
 }
 .task-table {
   width: 50%;
-  margin: 0 auto;
+  margin: 0 auto 10px;
 
   border-collapse: collapse;
 }
@@ -38,6 +38,20 @@
   border-right: none;
 
   text-align: center;
+}
+.task-add-wrapper {
+  width: 50%;
+  margin: 0 auto;
+}
+.task-add__button {
+  display: block;
+
+  border: none;
+
+  background-color: transparent;
+
+  /* width: 20px;
+  height: 20px; */
 }
 .modal-layout {
   position: fixed;

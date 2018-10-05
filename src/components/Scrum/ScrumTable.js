@@ -14,9 +14,9 @@ const ScrumTask = props => {
 };
 
 class ScrumTable extends React.Component {
-  static filter = {
-    status: "status"
-  };
+  // static filter = {
+  //   status: "status"
+  // };
 
   constructor(props) {
     super(props);
