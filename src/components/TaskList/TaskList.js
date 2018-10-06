@@ -53,8 +53,7 @@ class TaskList extends React.Component {
       currentFilter: TaskList.filters.task,
       isFilterReverse: false,
       openedTask: null,
-      addingTask: false,
-      tasks: []
+      addingTask: false
     };
   }
 
@@ -112,16 +111,18 @@ class TaskList extends React.Component {
   }
 
   handleClick = openedTask => this.setState({ openedTask });
+
   addTaskClick = addingTask => this.setState({ addingTask });
 
   render() {
     const TaskElement = this.filterTasks(this.props.tasks).map(task => (
       <Task
-        key={task.name}
+        key={task.id}
         task={task}
         onLinkClick={this.handleClick.bind(this)}
       />
     ));
+
     const { openedTask } = this.state;
     const { addingTask } = this.state;
 

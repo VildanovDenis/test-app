@@ -11,6 +11,14 @@ export const tasksReducer = (state = initialState, action) => {
         )
       };
     }
+    case "TASK-ADD": {
+      const maxId = Math.max(...Object.keys(state));
+      const incrementalId = maxId + 1;
+      return {
+        ...state,
+        [incrementalId]: { ...action.payload, id: incrementalId }
+      };
+    }
     default: {
       return state;
     }

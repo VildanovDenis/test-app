@@ -11,6 +11,7 @@
   transform: translateX(-50%) translateY(-50%);
 
   background-color: #ffffff;
+  overflow: auto;
 }
 .task-add__form {
   display: flex;
