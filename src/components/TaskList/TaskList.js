@@ -1,11 +1,14 @@
 import React from "react";
 import TaskPage from "../TaskPage/TaskPage";
 import TaskAdd from "../TaskAdd/TaskAdd";
-import "../TaskList/style.css";
+
 import { tableRenderScrum } from "../../store/actions/table-render-action";
+import { getTasksAsArray } from "../../store/reducers/tasks";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { tasksAction } from "../../store/actions/tasks-action";
+
+import "../TaskList/style.css";
 
 const Task = props => {
   const { task, onLinkClick } = props;
@@ -112,7 +115,6 @@ class TaskList extends React.Component {
   addTaskClick = addingTask => this.setState({ addingTask });
 
   render() {
-    const tasks = this.props;
     const TaskElement = this.filterTasks(this.props.tasks).map(task => (
       <Task
         key={task.name}
@@ -219,7 +221,7 @@ const mapStateToProps = state => {
   console.log(state);
   return {
     isScrumShow: state.scrumTableReducer.isScrumShow,
-    tasks: state.tasksReducer
+    tasks: getTasksAsArray(state)
   };
 };
 

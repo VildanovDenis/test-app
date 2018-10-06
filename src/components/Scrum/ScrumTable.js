@@ -23,9 +23,6 @@ class ScrumTable extends React.Component {
   }
 
   render() {
-    const ScrumTaskElement = tasks.map(task => (
-      <ScrumTask key={task.name} task={task} />
-    ));
     const doneTasks = tasks
       .filter(task => task.status === "Готово")
       .map(task => <ScrumTask key={task.name} task={task} />);
