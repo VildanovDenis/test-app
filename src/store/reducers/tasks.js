@@ -19,6 +19,11 @@ export const tasksReducer = (state = initialState, action) => {
         [incrementalId]: { ...action.payload, id: incrementalId }
       };
     }
+    case "TASK-EDIT": {
+      const { id } = action.payload;
+
+      return { ...state, [id]: action.payload };
+    }
     default: {
       return state;
     }

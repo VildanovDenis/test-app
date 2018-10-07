@@ -1,5 +1,10 @@
 import React from "react";
-import tasks from "../../tasks";
+
+import { tasksAction } from "../../store/actions/tasks-action";
+import { getTasksAsArray } from "../../store/reducers/tasks";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+
 import "../Scrum/style.css";
 
 const ScrumTask = props => {
@@ -18,14 +23,20 @@ class ScrumTable extends React.Component {
     super(props);
   }
 
+  componentWillMount() {
+    import("../../tasks").then(result => {
+      this.props.tasksAction(result.default);
+    });
+  }
+
   render() {
-    const doneTasks = tasks
+    const doneTasks = this.props.tasks
       .filter(task => task.status === "Готово")
       .map(task => <ScrumTask key={task.name} task={task} />);
-    const progressTasks = tasks
+    const progressTasks = this.props.tasks
       .filter(task => task.status === "В процессе")
       .map(task => <ScrumTask key={task.name} task={task} />);
-    const plannedTasks = tasks
+    const plannedTasks = this.props.tasks
       .filter(task => task.status === "План")
       .map(task => <ScrumTask key={task.name} task={task} />);
     return (
@@ -60,4 +71,21 @@ class ScrumTable extends React.Component {
   }
 }
 
-export default ScrumTable;
+const mapStateToProps = state => {
+  return {
+    tasks: getTasksAsArray(state)
+  };
+};
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      tasksAction
+    },
+    dispatch
+  );
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ScrumTable);

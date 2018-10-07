@@ -1,0 +1,24 @@
+.task-edit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  box-sizing: border-box;
+
+  width: 30%;
+  padding: 20px;
+  margin: 10px auto 0;
+
+  transform: translateX(-50%) translateY(-50%);
+
+  background-color: #ffffff;
+  overflow: auto;
+}
+.task-edit div {
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: 10px;
+}
+.task-edit div span {
+  margin-bottom: 5px;
+}

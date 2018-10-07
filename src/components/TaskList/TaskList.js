@@ -1,17 +1,20 @@
 import React from "react";
 import TaskPage from "../TaskPage/TaskPage";
 import TaskAdd from "../TaskAdd/TaskAdd";
+import TaskEdit from "../TaskEdit/TaskEdit";
 
 import { tableRenderScrum } from "../../store/actions/table-render-action";
 import { getTasksAsArray } from "../../store/reducers/tasks";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { tasksAction } from "../../store/actions/tasks-action";
+import { taskAddAction } from "../../store/actions/task-add-action";
+import { taskEditAction } from "../../store/actions/task-edit-action";
 
 import "../TaskList/style.css";
 
 const Task = props => {
-  const { task, onLinkClick } = props;
+  const { task, onLinkClick, onEditTaskClick } = props;
 
   return (
     <tr>
@@ -29,6 +32,18 @@ const Task = props => {
       <td>{task.description}</td>
       <td>{task.status}</td>
       <td>{task.priority}</td>
+      <td>
+        <button
+          className="task-table__button"
+          type="button"
+          onClick={() => {
+            onEditTaskClick(task);
+            console.log(task);
+          }}
+        >
+          Изменить
+        </button>
+      </td>
     </tr>
   );
 };
@@ -53,6 +68,7 @@ class TaskList extends React.Component {
       currentFilter: TaskList.filters.task,
       isFilterReverse: false,
       openedTask: null,
+      editedTask: null,
       addingTask: false
     };
   }
@@ -111,8 +127,8 @@ class TaskList extends React.Component {
   }
 
   handleClick = openedTask => this.setState({ openedTask });
-
   addTaskClick = addingTask => this.setState({ addingTask });
+  editTaskClick = editedTask => this.setState({ editedTask });
 
   render() {
     const TaskElement = this.filterTasks(this.props.tasks).map(task => (
@@ -120,11 +136,12 @@ class TaskList extends React.Component {
         key={task.id}
         task={task}
         onLinkClick={this.handleClick.bind(this)}
+        onEditTaskClick={this.editTaskClick.bind(this)}
       />
     ));
-
     const { openedTask } = this.state;
     const { addingTask } = this.state;
+    const { editedTask } = this.state;
 
     return (
       <section className="table-wrapper">
@@ -181,6 +198,7 @@ class TaskList extends React.Component {
                   Приоритет
                 </button>
               </th>
+              <th />
             </tr>
             {TaskElement}
           </tbody>
@@ -195,21 +213,27 @@ class TaskList extends React.Component {
           </button>
         </div>
         {addingTask && (
-          <div
-            className="modal-layout"
-            // onClick={() => this.addTaskClick(false)}
-          >
-            <TaskAdd onButtonClick={this.addTaskClick.bind(this)} />
+          <div className="modal-layout">
+            <TaskAdd
+              onButtonClick={this.addTaskClick.bind(this)}
+              taskAddAction={this.props.taskAddAction}
+            />
           </div>
         )}
         {openedTask && (
-          <div
-            className="modal-layout"
-            // onClick={() => this.handleClick(null)}
-          >
+          <div className="modal-layout">
             <TaskPage
               onButtonClick={this.handleClick.bind(this)}
               task={openedTask}
+            />
+          </div>
+        )}
+        {editedTask && (
+          <div className="modal-layout">
+            <TaskEdit
+              task={editedTask}
+              onButtonClick={this.editTaskClick.bind(this)}
+              taskEditAction={this.props.taskEditAction}
             />
           </div>
         )}
@@ -219,7 +243,6 @@ class TaskList extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     isScrumShow: state.scrumTableReducer.isScrumShow,
     tasks: getTasksAsArray(state)
@@ -230,7 +253,9 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       tableRenderScrum,
-      tasksAction
+      tasksAction,
+      taskAddAction,
+      taskEditAction
     },
     dispatch
   );

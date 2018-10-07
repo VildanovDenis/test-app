@@ -1,17 +1,8 @@
 import React from "react";
 
-import { taskAddAction } from "../../store/actions/task-add-action";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-
 import "../TaskAdd/style.css";
 
 class TaskAdd extends React.Component {
-  /**
-   *
-   * @param {Object} props
-   * @param {Function} props.onButtonClick
-   */
   constructor(props) {
     super(props);
     this.state = {
@@ -61,17 +52,6 @@ class TaskAdd extends React.Component {
       timetodoInput: event.target.value
     });
   }
-  addTask() {
-    console.log({
-      name: this.state.nameInput,
-      description: this.state.descriptionInput,
-      status: this.state.statusInput,
-      priority: this.state.priorityInput,
-      date: this.state.dateInput,
-      timetodo: this.state.timetodoInput,
-      wastedtime: this.state.wastedtimeInput
-    });
-  }
 
   render() {
     return (
@@ -85,7 +65,6 @@ class TaskAdd extends React.Component {
               type="text"
               name="name"
               onChange={this.onNameInputChange}
-              required
             />
           </label>
           <label>
@@ -94,7 +73,6 @@ class TaskAdd extends React.Component {
               className="input text-area task-description"
               name="description"
               onChange={this.onDescriptionInputChange}
-              required
             />
           </label>
           <label>
@@ -127,7 +105,6 @@ class TaskAdd extends React.Component {
               type="datetime-local"
               name="date"
               onChange={this.onDateInputChange}
-              required
             />
           </label>
           <label>
@@ -137,25 +114,13 @@ class TaskAdd extends React.Component {
               type="text"
               name="timetodo"
               onChange={this.onTimetodoInputChange}
-              required
             />
           </label>
-          {/* <label>
-            <span className="disabled">Потраченное время:</span>
-            <input
-              className="input"
-              type="text"
-              name="wastedtime"
-              value=" "
-              disabled
-            />
-          </label> */}
           <button
             type="submit"
             className="task-add-button"
             onClick={event => {
               event.preventDefault;
-              this.addTask();
               this.props.taskAddAction({
                 name: this.state.nameInput,
                 description: this.state.descriptionInput,
@@ -181,23 +146,4 @@ class TaskAdd extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  console.log(state);
-  return {
-    // isScrumShow: state.scrumTableReducer.isScrumShow,
-    // task: getTasksAsArray(state)
-  };
-};
-
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-      taskAddAction
-    },
-    dispatch
-  );
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TaskAdd);
+export default TaskAdd;
