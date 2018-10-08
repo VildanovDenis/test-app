@@ -10,11 +10,18 @@ import { bindActionCreators } from "redux";
 import { tasksAction } from "../../store/actions/tasks-action";
 import { taskAddAction } from "../../store/actions/task-add-action";
 import { taskEditAction } from "../../store/actions/task-edit-action";
+import { taskDeleteAction } from "../../store/actions/task-delete-action";
 
 import "../TaskList/style.css";
 
 const Task = props => {
-  const { task, onLinkClick, onEditTaskClick } = props;
+  const {
+    task,
+    onLinkClick,
+    onEditTaskClick,
+    deleteTaskClick,
+    taskDeleteAction
+  } = props;
 
   return (
     <tr>
@@ -43,6 +50,17 @@ const Task = props => {
         >
           Изменить
         </button>
+        <button
+          className="task-table__button"
+          type="button"
+          onClick={() => {
+            deleteTaskClick(task);
+            taskDeleteAction(task);
+            console.log(task);
+          }}
+        >
+          Удалить
+        </button>
       </td>
     </tr>
   );
@@ -69,7 +87,8 @@ class TaskList extends React.Component {
       isFilterReverse: false,
       openedTask: null,
       editedTask: null,
-      addingTask: false
+      addingTask: false,
+      deletedTask: null
     };
   }
 
@@ -129,6 +148,7 @@ class TaskList extends React.Component {
   handleClick = openedTask => this.setState({ openedTask });
   addTaskClick = addingTask => this.setState({ addingTask });
   editTaskClick = editedTask => this.setState({ editedTask });
+  deleteTaskClick = deletedTask => this.setState({ deletedTask });
 
   render() {
     const TaskElement = this.filterTasks(this.props.tasks).map(task => (
@@ -137,6 +157,8 @@ class TaskList extends React.Component {
         task={task}
         onLinkClick={this.handleClick.bind(this)}
         onEditTaskClick={this.editTaskClick.bind(this)}
+        deleteTaskClick={this.deleteTaskClick.bind(this)}
+        taskDeleteAction={this.props.taskDeleteAction}
       />
     ));
     const { openedTask } = this.state;
@@ -255,7 +277,8 @@ const mapDispatchToProps = dispatch =>
       tableRenderScrum,
       tasksAction,
       taskAddAction,
-      taskEditAction
+      taskEditAction,
+      taskDeleteAction
     },
     dispatch
   );

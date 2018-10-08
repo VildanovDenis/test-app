@@ -52,6 +52,18 @@ class TaskAdd extends React.Component {
       timetodoInput: event.target.value
     });
   }
+  onAddTaskClick() {
+    this.props.taskAddAction({
+      name: this.state.nameInput,
+      description: this.state.descriptionInput,
+      status: this.state.statusInput,
+      priority: this.state.priorityInput,
+      date: this.state.dateInput,
+      timetodo: this.state.timetodoInput,
+      wastedtime: this.state.wastedtimeInput
+    });
+    this.props.onButtonClick(false);
+  }
 
   render() {
     return (
@@ -119,19 +131,7 @@ class TaskAdd extends React.Component {
           <button
             type="submit"
             className="task-add-button"
-            onClick={event => {
-              event.preventDefault;
-              this.props.taskAddAction({
-                name: this.state.nameInput,
-                description: this.state.descriptionInput,
-                status: this.state.statusInput,
-                priority: this.state.priorityInput,
-                date: this.state.dateInput,
-                timetodo: this.state.timetodoInput,
-                wastedtime: this.state.wastedtimeInput
-              });
-              this.props.onButtonClick(false);
-            }}
+            onClick={() => this.onAddTaskClick()}
           >
             Добавить
           </button>

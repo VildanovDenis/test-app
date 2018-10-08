@@ -1,6 +1,7 @@
 import React from "react";
 import "./style.css";
 import { auth } from "../../API/auth";
+import { Link } from "react-router-dom";
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -63,9 +64,14 @@ class LoginForm extends React.Component {
             </label>
           </div>
           <div className="login-form__login">
-            <button type="button" className="" onClick={this.handleSubmit}>
+            <Link
+              to="/TaskList"
+              type="button"
+              className=""
+              onClick={this.handleSubmit}
+            >
               Войти
-            </button>
+            </Link>
             <label>
               <input type="checkbox" />
               Запомнить меня

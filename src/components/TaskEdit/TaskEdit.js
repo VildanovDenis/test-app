@@ -2,7 +2,6 @@ import React from "react";
 import "../TaskEdit/style.css";
 
 class TaskEdit extends React.Component {
-  // ({ onButtonClick, task })
   constructor(props) {
     super(props);
     this.state = {
@@ -51,6 +50,20 @@ class TaskEdit extends React.Component {
       wastedtimeInput: event.target.value
     });
   }
+  OnEditTaskClick() {
+    this.props.taskEditAction({
+      id: this.props.task.id,
+      name: this.state.nameInput,
+      description: this.state.descriptionInput,
+      status: this.state.statusInput,
+      priority: this.state.priorityInput,
+      date: this.state.dateInput,
+      timetodo: this.state.timetodoInput,
+      wastedtime: this.state.wastedtimeInput
+    });
+    this.props.onButtonClick(false);
+  }
+
   render() {
     return (
       <div className="task-edit">
@@ -105,17 +118,7 @@ class TaskEdit extends React.Component {
         <button
           type="button"
           onClick={() => {
-            this.props.taskEditAction({
-              id: this.props.task.id,
-              name: this.state.nameInput,
-              description: this.state.descriptionInput,
-              status: this.state.statusInput,
-              priority: this.state.priorityInput,
-              date: this.state.dateInput,
-              timetodo: this.state.timetodoInput,
-              wastedtime: this.state.wastedtimeInput
-            });
-            this.props.onButtonClick(false);
+            this.OnEditTaskClick();
           }}
         >
           Сохранить

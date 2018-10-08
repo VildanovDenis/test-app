@@ -24,6 +24,14 @@ export const tasksReducer = (state = initialState, action) => {
 
       return { ...state, [id]: action.payload };
     }
+    case "TASK-DELETE": {
+      const { id } = action.payload;
+
+      const newState = { ...state };
+      delete newState[id];
+
+      return newState;
+    }
     default: {
       return state;
     }
