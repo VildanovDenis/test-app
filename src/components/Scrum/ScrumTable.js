@@ -4,6 +4,7 @@ import { tasksAction } from "../../store/actions/tasks-action";
 import { getTasksAsArray } from "../../store/reducers/tasks";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { Link } from "react-router-dom";
 
 import "../Scrum/style.css";
 
@@ -42,17 +43,18 @@ class ScrumTable extends React.Component {
     return (
       <section className="scrum-table__wrapper">
         <div className="button-wrapper">
-          <a
+          <Link
+            to="/TaskList"
             className="scrum-table__button"
             onClick={event => {
-              event.preventDefault();
+              // event.preventDefault();
               this.props.toggleTable(false);
             }}
             type="button"
             href=""
           >
             Назад к таблице
-          </a>
+          </Link>
         </div>
         <div className="done">
           <h2>Готово</h2>

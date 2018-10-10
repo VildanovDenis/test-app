@@ -1,11 +1,14 @@
 import React from "react";
 import "../TaskPage/style.css";
 
+import { Link } from "react-router-dom";
+
 // Подробная страница с задачей
 function TaskPage({ onButtonClick, task }) {
   return (
     <div className="task-page">
-      <button
+      <Link
+        to="/TaskList"
         type="button"
         className="task-page__button"
         onClick={() => onButtonClick(null)}

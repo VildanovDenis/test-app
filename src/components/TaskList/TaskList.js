@@ -11,6 +11,7 @@ import { tasksAction } from "../../store/actions/tasks-action";
 import { taskAddAction } from "../../store/actions/task-add-action";
 import { taskEditAction } from "../../store/actions/task-edit-action";
 import { taskDeleteAction } from "../../store/actions/task-delete-action";
+import { Link } from "react-router-dom";
 
 import "../TaskList/style.css";
 
@@ -26,21 +27,24 @@ const Task = props => {
   return (
     <tr>
       <td>
-        <a
-          href=""
+        <Link
+          key={task.id}
+          to={"/TaskList/" + task.id}
           onClick={event => {
-            event.preventDefault();
+            // event.preventDefault();
+            console.log(task.id);
             onLinkClick(task);
           }}
         >
           {task.name}
-        </a>
+        </Link>
       </td>
       <td>{task.description}</td>
       <td>{task.status}</td>
       <td>{task.priority}</td>
       <td>
-        <button
+        <Link
+          to={"/TaskList/" + task.id + "Edit"}
           className="task-table__button"
           type="button"
           onClick={() => {
@@ -49,7 +53,7 @@ const Task = props => {
           }}
         >
           Изменить
-        </button>
+        </Link>
         <button
           className="task-table__button"
           type="button"
@@ -168,16 +172,17 @@ class TaskList extends React.Component {
     return (
       <section className="table-wrapper">
         <div className="button-wrapper">
-          <a
+          <Link
+            to="/ScrumTable"
             className="table__button-to-scrum"
             href="#"
             onClick={event => {
-              event.preventDefault();
+              // event.preventDefault();
               this.props.tableRenderScrum(true);
             }}
           >
             Scrum-доска
-          </a>
+          </Link>
         </div>
         <table className="task-table">
           <tbody key="body">
@@ -226,13 +231,13 @@ class TaskList extends React.Component {
           </tbody>
         </table>
         <div className="task-add-wrapper">
-          <button
+          <Link
+            to={"/TaskList/TaskAdd"}
             className="task-add__button"
-            type="button"
             onClick={() => this.addTaskClick(true)}
           >
             Добавить задачу
-          </button>
+          </Link>
         </div>
         {addingTask && (
           <div className="modal-layout">

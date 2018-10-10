@@ -7,6 +7,7 @@ import { authAction } from "../store/actions/auth-action";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { tableRenderScrum } from "../store/actions/table-render-action";
+import { Route, IndexRoute, browserHistory } from "react-router";
 
 class App extends React.Component {
   constructor(props) {
@@ -25,12 +26,20 @@ class App extends React.Component {
       <React.Fragment>
         {isLogin ? (
           isScrumShow ? (
-            <ScrumTable toggleTable={this.props.toggleTable} />
+            <Route
+              path="/ScrumTable"
+              render={props => (
+                <ScrumTable {...props} toggleTable={this.props.toggleTable} />
+              )}
+            />
           ) : (
-            <TaskList />
+            <Route path="/TaskList" component={TaskList} />
           )
         ) : (
-          <LoginForm onLogin={this.props.auth} />
+          <Route
+            path="/"
+            render={props => <LoginForm {...props} onLogin={this.props.auth} />}
+          />
         )}
       </React.Fragment>
     );

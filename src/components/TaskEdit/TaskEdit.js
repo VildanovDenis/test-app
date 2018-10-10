@@ -1,6 +1,8 @@
 import React from "react";
 import "../TaskEdit/style.css";
 
+import { Link } from "react-router-dom";
+
 class TaskEdit extends React.Component {
   constructor(props) {
     super(props);
@@ -67,7 +69,8 @@ class TaskEdit extends React.Component {
   render() {
     return (
       <div className="task-edit">
-        <button
+        <Link
+          to="/TaskList"
           type="button"
           className="task-page__button"
           onClick={() => this.props.onButtonClick(null)}

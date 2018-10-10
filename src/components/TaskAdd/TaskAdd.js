@@ -2,6 +2,8 @@ import React from "react";
 
 import "../TaskAdd/style.css";
 
+import { Link } from "react-router-dom";
+
 class TaskAdd extends React.Component {
   constructor(props) {
     super(props);
@@ -136,7 +138,8 @@ class TaskAdd extends React.Component {
             Добавить
           </button>
         </form>
-        <button
+        <Link
+          to="/TaskList"
           type="button"
           className="task-add__close-button"
           onClick={() => this.props.onButtonClick(false)}
