@@ -43,6 +43,10 @@
 .planned {
   width: 33%;
 }
+.done,
+.in-progress {
+  border-right: 1px solid black;
+}
 .done h2,
 .in-progress h2,
 .planned h2 {

@@ -1,23 +1,15 @@
 import React from "react";
 
+import ScrumTask from "../Scrum/ScrumTask";
 import { tasksAction } from "../../store/actions/tasks-action";
 import { getTasksAsArray } from "../../store/reducers/tasks";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Link } from "react-router-dom";
+import HTML5Backend from "react-dnd-html5-backend";
+import { DragDropContext } from "react-dnd";
 
 import "../Scrum/style.css";
-
-const ScrumTask = props => {
-  const { task } = props;
-  return (
-    <div className="scrum-task-page">
-      <span>Задача: {task.name}</span>
-      <span>Описание: {task.description}</span>
-      <span>Приоритет: {task.priority}</span>
-    </div>
-  );
-};
 
 class ScrumTable extends React.Component {
   constructor(props) {
@@ -30,16 +22,38 @@ class ScrumTable extends React.Component {
     });
   }
 
+  changeStatusTask = id => {
+    console.log("privet" + id);
+  };
+
   render() {
     const doneTasks = this.props.tasks
       .filter(task => task.status === "Готово")
-      .map(task => <ScrumTask key={task.name} task={task} />);
+      .map(task => (
+        <ScrumTask
+          key={task.name}
+          task={task}
+          handleDrop={id => this.changeStatusTask(id)}
+        />
+      ));
     const progressTasks = this.props.tasks
       .filter(task => task.status === "В процессе")
-      .map(task => <ScrumTask key={task.name} task={task} />);
+      .map(task => (
+        <ScrumTask
+          key={task.name}
+          task={task}
+          handleDrop={id => this.changeStatusTask(id)}
+        />
+      ));
     const plannedTasks = this.props.tasks
       .filter(task => task.status === "План")
-      .map(task => <ScrumTask key={task.name} task={task} />);
+      .map(task => (
+        <ScrumTask
+          key={task.name}
+          task={task}
+          handleDrop={id => this.changeStatusTask(id)}
+        />
+      ));
     return (
       <section className="scrum-table__wrapper">
         <div className="button-wrapper">
@@ -86,7 +100,7 @@ const mapDispatchToProps = dispatch =>
     },
     dispatch
   );
-
+ScrumTable = DragDropContext(HTML5Backend)(ScrumTable);
 export default connect(
   mapStateToProps,
   mapDispatchToProps
